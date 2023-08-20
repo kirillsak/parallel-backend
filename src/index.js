@@ -164,3 +164,25 @@ app.get("/getAddress/:username", async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+app.get("/getUserDetails/:username", async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    const user = await User.findOne({ username: username });
+    const testUser = await User.findOne({ username: "account" });
+    console.log("finding");
+    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
