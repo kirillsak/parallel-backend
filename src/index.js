@@ -87,7 +87,7 @@ app.post("/uploadProfilePic", upload.single("profilePic"), async (req, res) => {
   }
 });
 
-app.get("/getUserProfilePic/:username", async (req, res) => {
+app.get("/getProfilePic/:username", async (req, res) => {
   const { username } = req.params;
 
   try {
